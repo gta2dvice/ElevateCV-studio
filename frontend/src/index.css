@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 1. PREMIUM TYPOGRAPHY */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* 2. MODERN RADIUS (The "Squircle" Look) */
+    --radius: 1.5rem; 
+
+    /* 3. OBSIDIAN DARK SYSTEM (Frosted, Futuristic, Deep) */
+    --background: 224 71% 4%; /* Cosmic Space Obsidian #070913 */
+    --foreground: 210 40% 98%;
+
+    --card: 224 71% 7%; /* Frosted Slate Card #0a0d1b */
+    --card-foreground: 210 40% 98%;
+
+    --primary: 262 83% 58%; /* Electric Purple */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 224 71% 10%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 224 71% 10%;
+    --muted-foreground: 215 16% 75%;
+
+    --border: 224 71% 14%;
+    --input: 224 71% 10%;
+    --ring: 262 83% 58%;
+  }
+
+  * {
+    @apply border-border;
+    font-family: 'Plus Jakarta Sans', sans-serif; /* Global Font Apply */
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-purple-500/20 selection:text-purple-200;
+  }
+}
+
+/* 4. PREMIUM UTILITIES */
+@layer components {
+  .premium-shadow {
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.4), 0 0 80px rgba(139, 92, 246, 0.03);
+  }
+  
+  .glass-card {
+    background: rgba(16, 22, 38, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.3);
+  }
+
+  .obsidian-bg {
+    background: radial-gradient(circle at 50% -20%, #18153c 0%, #070913 80%);
+  }
+
+  .neon-spotlight-purple {
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+  }
+
+  .neon-spotlight-cyan {
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
+  }
+
+  .neon-border-glow-purple:focus-within {
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.15);
+    border-color: rgba(139, 92, 246, 0.3);
+  }
+}
+
+/* 5. EDITOR LIST STYLES */
+.rsw-ce ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+.rsw-ce ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+}
+
+/* 6. PRINT ARCHITECTURE (Preserved & Optimized) */
+@media print {
+  #noPrint, #printHeader {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #pdf-content, #pdf-content * {
+    visibility: visible;
+  }
+
+  #pdf-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  @page {
+    margin: 0;
+    size: A4;
+  }
+}
+
+/* 7. CUSTOM SCROLLBAR */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full hover:bg-slate-400 transition-colors;
+}
+
+@layer components {
+  /* The "Magic" Pill for AI suggestions */
+  .ai-suggestion-pill {
+    @apply px-3 py-1.5 rounded-full border border-purple-100 bg-purple-50/50 
+           text-[11px] font-bold text-purple-600 cursor-pointer hover:bg-purple-600 
+           hover:text-white transition-all active:scale-95 flex items-center gap-1.5;
+  }
+  
+  .premium-input {
+    @apply w-full p-4 bg-slate-50 border-2 border-transparent rounded-2xl outline-none 
+           focus:bg-white focus:border-purple-600/20 focus:ring-8 focus:ring-purple-600/5 
+           transition-all text-slate-800 font-medium placeholder:text-slate-300;
+  }
+}
+@keyframes forge-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(147, 51, 234, 0.4), 0 0 30px rgba(147, 51, 234, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(147, 51, 234, 0.7), 0 0 50px rgba(147, 51, 234, 0.3); }
+}
+
+.animate-forge-glow {
+  animation: forge-glow 3s ease-in-out infinite;
+}
+
+
+/* Week 4 Final Polish: PDF Boundary Rules */
+@media print {
+  .preview-container section {
+    page-break-inside: avoid;
+    margin-bottom: 10mm;
+  }
+  
+  /* Ensure images and ratings don't disappear */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+/* Prevent text clipping in PDF */
+#resume-preview {
+  overflow: visible !important;
+  height: auto !important;
+}
